@@ -1,9 +1,10 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-
+import ImageIcon from '../../assets/icons/ImageIcon';
 const Upload = ({ request }) => {
     return(
         <TouchableOpacity title="Select Image" onPress={() => request()} style={styles.touchContainer}>
+           <ImageIcon />
            <Text style={styles.textStyle}>Upload your child photo</Text>
            <Text style={styles.subTextStyle}>Image Weight: Max 5 MB</Text>
            <Text style={styles.subTextStyle}>Image Format: JPG & PNG</Text>
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderWidth: 2,
         borderStyle: 'dashed',
+        borderColor: '#000000',
         borderRadius: 10,
         marginTop: 20,
     },

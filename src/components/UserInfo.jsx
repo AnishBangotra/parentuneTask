@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     gap: 21,
+    height: 57,
     alignItems: 'center',
   },
   input: {

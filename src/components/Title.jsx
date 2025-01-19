@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Icon from '../../assets/images/LeftArrow.png';
+import LeftArrow from '../../assets/icons/LeftArrow';
 
 const Title = () => {
     return(
         <View style={styles.container}>
-            {/* <Icon /> */}
+            <LeftArrow />
             <Text style={styles.text}>Contest Name</Text>
         </View>
     )
@@ -14,11 +14,13 @@ const Title = () => {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        gap: 3
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 25
     },
     text: {
         fontWeight: 'bold',
-        fontSize: 21
+        fontSize: 21,
     }
 });
 

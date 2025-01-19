@@ -1,9 +1,9 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
-const PreviewButton = ({ isDisabled }) => {
+const PreviewButton = ({ toggle, isDisabled }) => {
     return (
       <TouchableOpacity
-        onPress={() => alert('Pressed')}
+        onPress={() => toggle()}
         activeOpacity={0.7}
         style={[styles.button, isDisabled ? styles.buttonDisabled : styles.buttonEnabled]}
         disabled={isDisabled}

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
+import AddIcon from '../../assets/icons/AddIcon';
+import NegativeIcon from '../../assets/icons/NegativeIcon';
 
 const ExpandableList = ({title}) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -27,8 +29,7 @@ const ExpandableList = ({title}) => {
       <View style={styles.header}>
         <Text style={styles.text}>{title}</Text>
         <TouchableOpacity onPress={toggleExpand}>
-          {/* <Icon name={isExpanded ? 'remove' : 'add'} size={24} color="#000" /> */}
-          {isExpanded ? <Text>-</Text> : <Text>+</Text>}
+          {isExpanded ? <NegativeIcon /> : <AddIcon />}
         </TouchableOpacity>
       </View>
 

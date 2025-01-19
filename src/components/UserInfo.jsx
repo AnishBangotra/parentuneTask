@@ -34,6 +34,9 @@ const UserInfo = ({ onInputChange }) => {
         style={styles.fullWidthInput}
         placeholder="Full name"
         placeholderTextColor="#242F35"
+        autoCorrect={false}
+        autoCapitalize="none" 
+        keyboardType="default"
         value={form.fullName}
         onChangeText={(value) => handleInputChange('fullName', value)}
       />
@@ -43,6 +46,8 @@ const UserInfo = ({ onInputChange }) => {
           style={[styles.input, styles.dateInput]}
           placeholder="DD"
           placeholderTextColor="#242F35"
+          autoCorrect={false}
+          autoCapitalize="none" 
           keyboardType="numeric"
           maxLength={2}
           value={form.date}
@@ -52,6 +57,8 @@ const UserInfo = ({ onInputChange }) => {
           style={[styles.input, styles.dateInput]}
           placeholder="MM"
           placeholderTextColor="#242F35"
+          autoCorrect={false}
+          autoCapitalize="none" 
           keyboardType="numeric"
           maxLength={2}
           value={form.month}
@@ -61,6 +68,8 @@ const UserInfo = ({ onInputChange }) => {
           style={[styles.input, styles.yearInput]}
           placeholder="YYYY"
           placeholderTextColor="#242F35"
+          autoCorrect={false}
+          autoCapitalize="none" 
           keyboardType="numeric"
           maxLength={4}
           value={form.year}

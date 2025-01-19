@@ -10,10 +10,14 @@ import UserInfo from './src/components/UserInfo';
 import ExpandableList from './src/components/ExpandableList';
 import PreviewButton from './src/components/PreviewButton';
 import FlowButtons from './src/components/FlowButtons';
+import GradientDisplay from './src/components/GradientDisplay';
+import RowIcons from './src/components/RowIcons';
 
 const App = () => {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(false);
+  const [submit, setSubmit] = useState(false);
+  const [age, setAge] = useState(null);
   const [formValues, setFormValues] = useState({
     fullName: '',
     date: '',
@@ -21,10 +25,60 @@ const App = () => {
     year: '',
   });
 
+  const isValidDate = (day, month, year) => {
+    const inputDate = new Date(year, month - 1, day);
+    const today = new Date();
+  
+    if (
+      inputDate instanceof Date &&
+      !isNaN(inputDate) &&
+      inputDate <= today &&
+      inputDate.getFullYear() > 1900 
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  const calculateAge = (day, month, year) => {
+    if (isValidDate(day, month, year)) {
+      const birthDate = new Date(year, month - 1, day); 
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+      if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+      return age;
+    } else {
+      return null;
+    }
+  }
+
+  const handleSubmit = () => {
+    const { date, month, year } = formValues;
+
+    if (isValidDate(date, month, year) && isValidName(formValues.fullName)) {
+      setAge(calculateAge(date, month, year));
+      togglePreview();
+    } else {
+      alert('Please enter a valid date and name.');
+      setAge(null);
+    }
+  };
+
   const isFormValid = () => {
     const { fullName, date, month, year } = formValues;
     return image && fullName.trim() && date.trim() && month.trim() && year.trim();
   };
+
+  const isValidName = (name) => {
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    return nameRegex.test(name);
+  }
 
   const requestPermissions = async () => {
     try {
@@ -146,6 +200,10 @@ const App = () => {
     setPreview(!preview);
   }
 
+  const callSubmit = () => {
+    setSubmit(true);
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -153,11 +211,16 @@ const App = () => {
         {!image ? (
           <Upload request={requestPermissions}/>
         ) : <Image source={{ uri: image }} style={styles.imagePreview} />}
-        <UserInfo onInputChange={(values) => setFormValues(values)} />
-        <Text style={{marginTop: "30", marginBottom: "30"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, iste! Ipsa obcaecati sequi sed facilis officiis! Soluta perspiciatis architecto magni.</Text>
+        {preview ? <RowIcons /> : null}
+        {preview ?  <GradientDisplay name={formValues.fullName} age={age} /> : <UserInfo onInputChange={(values) => setFormValues(values)} /> }
+        <Text style={styles.description}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, iste! Ipsa obcaecati sequi sed facilis officiis! Soluta perspiciatis architecto magni.</Text>
         <ExpandableList title={'Rules of the Game'} />
         <ExpandableList title={'The Final Print'} />
-        {preview ? <FlowButtons toggle={togglePreview} /> : <PreviewButton toggle={togglePreview} isDisabled={!isFormValid()} />}
+        {!submit ? (
+          <>
+             {preview ? <FlowButtons toggle={togglePreview} submit={callSubmit} /> : <PreviewButton toggle={handleSubmit} isDisabled={!isFormValid()} />}
+          </>
+        ) : null}
       </ScrollView>
     </View>
   );
@@ -171,11 +234,15 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   imagePreview: {
-    width: 327,
+    width: 'auto',
     height: 327,
-    borderRadius: 5,
+    borderRadius: 10,
     marginTop: 20,
   },
+  description: {
+    marginTop: 30,
+    marginBottom: 30
+  }
 });
 
 export default App;

@@ -1,5 +1,15 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+# Overview of the Task
+
+1. Implemented the contest app design as per the Figma received. Integrated the media pickers and api calls while uploading media with permissions.
+2. Added Validation for the fields like age is there like dates which don't exist or more than current time will be validated, similarly for name only alpha characters are allowed for 
+   Full Name.
+3. Implemented the collapsible/uncollapsible functionality for the "Rules of the Game" section.
+4. Added Edit and Submit feature.
+5. Ensuring application work properly on IOS and different aspect ratios.
+
+
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.

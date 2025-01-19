@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const FlowButtons = ({ toggle, onSubmitPress }) => {
+const FlowButtons = ({ toggle, submit }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={[styles.button, styles.editButton]} onPress={toggle}>
         <Text style={styles.editText}>EDIT</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.button, styles.submitButton]} onPress={() => alert('submitted')}>
+      <TouchableOpacity style={[styles.button, styles.submitButton]} onPress={submit}>
         <Text style={styles.submitText}>SUBMIT</Text>
       </TouchableOpacity>
     </View>
